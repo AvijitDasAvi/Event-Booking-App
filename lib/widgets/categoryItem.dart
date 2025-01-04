@@ -14,6 +14,7 @@ Widget buildCategoryItem(String imagePath, String label) {
         ),
         width: 100.0,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               imagePath,

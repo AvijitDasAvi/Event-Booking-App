@@ -80,12 +80,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: 150.0,
               child: ListView(
                 children: [
                   Material(
-                    child: Container(
+                    child: SizedBox(
                       width: 100.0,
                       child: Column(
                         children: [],

@@ -1,4 +1,5 @@
 import 'package:event_booking_app/widgets/all_colors.dart';
+import 'package:event_booking_app/widgets/categoryItem.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,6 +10,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // ScrollController to manage horizontal scrolling
+  final ScrollController _scrollController = ScrollController();
+
+  void _scrollLeft() {
+    _scrollController.animateTo(
+      _scrollController.offset - 120.0,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _scrollRight() {
+    _scrollController.animateTo(
+      _scrollController.offset + 120.0,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +47,12 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // For Location and Introduction
             Row(
               children: [
                 Icon(Icons.location_on_outlined),
                 Text(
-                  "Adabor,Dhaka",
+                  "Adabor, Dhaka",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20.0,
@@ -65,6 +92,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(height: 15.0),
+            // For Search field
             Container(
               padding: EdgeInsets.only(left: 10.0),
               width: MediaQuery.of(context).size.width,
@@ -80,21 +108,62 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 150.0,
-              child: ListView(
-                children: [
-                  Material(
-                    child: SizedBox(
-                      width: 100.0,
-                      child: Column(
-                        children: [],
-                      ),
+            SizedBox(height: 20.0),
+            // For list of the event categories with scrolling buttons
+            Row(
+              children: [
+                // Scroll Left Button
+                IconButton(
+                  icon: Icon(Icons.arrow_left, size: 40),
+                  onPressed: _scrollLeft,
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 110.0,
+                    child: ListView(
+                      controller: _scrollController,
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        // For categories 1
+                        buildCategoryItem(
+                          "assets/images/guitar.png",
+                          "Music",
+                        ),
+                        SizedBox(width: 20.0),
+                        // For categories 2
+                        buildCategoryItem(
+                          "assets/images/brand.png",
+                          "Fashion",
+                        ),
+                        SizedBox(width: 20.0),
+                        // For categories 3
+                        buildCategoryItem(
+                          "assets/images/gamer.png",
+                          "Gaming",
+                        ),
+                        SizedBox(width: 20.0),
+                        // For categories 4
+                        buildCategoryItem(
+                          "assets/images/catering.png",
+                          "Food",
+                        ),
+                        SizedBox(width: 20.0),
+                        // For categories 5
+                        buildCategoryItem(
+                          "assets/images/concert.png",
+                          "Festival",
+                        ),
+                      ],
                     ),
-                  )
-                ],
-              ),
-            )
+                  ),
+                ),
+                // Scroll Right Button
+                IconButton(
+                  icon: Icon(Icons.arrow_right, size: 40),
+                  onPressed: _scrollRight,
+                ),
+              ],
+            ),
           ],
         ),
       ),

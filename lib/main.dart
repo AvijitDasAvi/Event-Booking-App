@@ -1,4 +1,4 @@
-import 'package:event_booking_app/pages/home_page.dart';
+import 'package:event_booking_app/pages/details_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Event Booking",
-      home: HomePage(),
+      home: DetailsPage(),
     );
   }
 }
